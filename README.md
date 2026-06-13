@@ -47,19 +47,20 @@ Após o cadastro, é possível visualizar os gatos cadastrados no sistema e esco
 
 ```bash
 catgram/
-├── assets/
-│   ├── inicio.png
-│   ├── cadastro-gato.png
-│   └── criar-post.png
+├── Assets/
+│   ├── Inicio.png
+│   ├── Cadastrar_gato.png
+│   ├── Gatos_cadastrados.png
+│   └── Criar_post.png
 ├── config/
 │   └── db.php
-├── uploads/
-├── database.sql
-├── index.php
-├── processar_gato.php
-├── processar_post.php
+├── Uploads/
+├── Database.sql
+├── Index.php
+├── Processar_gato.php
+├── Processar_post.php
+├── Processar_seguidores.php
 └── README.md
-```
 
 ---
 
