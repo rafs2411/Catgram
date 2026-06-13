@@ -77,11 +77,10 @@ Principais tabelas utilizadas:
 * `gatos`: armazena os dados dos gatos cadastrados;
 * `posts`: armazena as publicações feitas no feed;
 * `comentarios`: armazena os comentários das publicações.
+* `seguidores`: armazena a relação de seguidores entre os gatos cadastrados.
 
 O script de criação do banco está disponível no arquivo:
 
-```bash
-database.sql
 ```
 
 ---
