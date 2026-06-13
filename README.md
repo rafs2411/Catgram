@@ -62,14 +62,14 @@ catgram/
 ├── Processar_seguidores.php
 └── README.md
 
+```
+
 ---
 
 ## 🐾 Banco de Dados
 
 O projeto utiliza um banco de dados chamado:
 
-```sql
-catgram_db
 ```
 
 Principais tabelas utilizadas:
@@ -86,7 +86,8 @@ database.sql
 
 ---
 
-## 📷 Telas do Sistema
+## 
+📷 Telas do Sistema
 
 ### Tela Inicial / Feed de Publicações
 
