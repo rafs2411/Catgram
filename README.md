@@ -92,7 +92,7 @@ database.sql
 Nesta tela são exibidas as publicações feitas pelos gatinhos cadastrados.
 O usuário pode visualizar as fotos, legendas, curtidas e comentários, além de navegar no sistema com o gato selecionado.
 
-![Tela Inicial](assets/Inicio.png)
+![Tela Inicial](Assets/Inicio.png)
 
 ---
 
@@ -100,7 +100,7 @@ O usuário pode visualizar as fotos, legendas, curtidas e comentários, além de
 
 Nesta tela o usuário pode cadastrar um gatinho, informando seus dados principais e enviando uma foto.
 
-![Cadastro do Gato](assets/Cadastrar_gato.png)
+![Cadastro do Gato](Assets/Cadastrar_gato.png)
 
 ---
 
@@ -109,7 +109,7 @@ Nesta tela o usuário pode cadastrar um gatinho, informando seus dados principai
 Nesta área são exibidos os gatos cadastrados no Catgram.
 O usuário pode visualizar os perfis disponíveis e escolher com qual gatinho deseja navegar pelo sistema.
 
-![Gatos Cadastrados](assets/Gatos_cadastrados.png)
+![Gatos Cadastrados](Assets/Gatos_cadastrados.png)
 
 ---
 
@@ -117,7 +117,7 @@ O usuário pode visualizar os perfis disponíveis e escolher com qual gatinho de
 
 Nesta tela é possível criar uma publicação para um gato cadastrado, adicionando imagem e legenda.
 
-![Criar Post](assets/Criar_post.png)
+![Criar Post](Assets/Criar_post.png)
 
 ---
 
