@@ -79,8 +79,6 @@ Principais tabelas utilizadas:
 * `comentarios`: armazena os comentários das publicações.
 * `seguidores`: armazena a relação de seguidores entre os gatos cadastrados.
 
-O script de criação do banco está disponível no arquivo:
-
 ```
 
 ---
