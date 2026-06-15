@@ -12,11 +12,14 @@ try {
     die("Erro ao conectar com o banco de dados de gatinhos: " . $e->getMessage());
 }
 
+// Busca todos os gatinhos para o seletor de perfil
 $stmtGatos = $pdo->query("SELECT * FROM gatos ORDER BY id DESC");
 $gatos = $stmtGatos->fetchAll();
 
+// Define qual gatinho está ativo navegando
 $gatoAtivoId = isset($_GET['gato_ativo']) ? (int)$_GET['gato_ativo'] : (isset($gatos[0]) ? $gatos[0]['id'] : null);
 
+// Busca os posts com os dados dos criadores
 $stmtPosts = $pdo->query("
     SELECT posts.*, gatos.nome AS gato_nome, gatos.foto AS gato_avatar 
     FROM posts 
@@ -294,6 +297,7 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             height: 100%;
             object-fit: cover;
             transition: var(--transition);
+            display: block;
         }
 
         .post-card:hover .post-image {
@@ -357,17 +361,9 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             gap: 0.6rem;
         }
 
-        .comment-list::-webkit-scrollbar {
-            width: 6px;
-        }
-        .comment-list::-webkit-scrollbar-track {
-            background: var(--pink-light);
-            border-radius: 10px;
-        }
-        .comment-list::-webkit-scrollbar-thumb {
-            background: var(--pink-medium);
-            border-radius: 10px;
-        }
+        .comment-list::-webkit-scrollbar { width: 6px; }
+        .comment-list::-webkit-scrollbar-track { background: var(--pink-light); border-radius: 10px; }
+        .comment-list::-webkit-scrollbar-thumb { background: var(--pink-medium); border-radius: 10px; }
 
         .comment-item {
             font-size: 0.9rem;
@@ -384,14 +380,9 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             border: 1px solid var(--pink-medium);
         }
 
-        .comment-item strong {
-            color: var(--purple-dark);
-        }
+        .comment-item strong { color: var(--purple-dark); }
 
-        .comment-form {
-            display: flex;
-            gap: 0.5rem;
-        }
+        .comment-form { display: flex; gap: 0.5rem; }
 
         .comment-input {
             flex: 1;
@@ -404,9 +395,7 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             transition: var(--transition);
         }
 
-        .comment-input:focus {
-            border-color: var(--pink-medium);
-        }
+        .comment-input:focus { border-color: var(--pink-medium); }
 
         .btn-comment-submit {
             background-color: var(--pink-medium);
@@ -422,10 +411,7 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             transition: var(--transition);
         }
 
-        .btn-comment-submit:hover {
-            background-color: var(--pink-dark);
-            transform: scale(1.05);
-        }
+        .btn-comment-submit:hover { background-color: var(--pink-dark); transform: scale(1.05); }
 
         .gato-card {
             background-color: var(--white);
@@ -450,11 +436,7 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             background-color: var(--pink-light);
         }
 
-        .gato-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .gato-img { width: 100%; height: 100%; object-fit: cover; }
 
         .gato-personality-badge {
             position: absolute;
@@ -469,12 +451,7 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             box-shadow: 0 4px 10px rgba(168, 85, 247, 0.3);
         }
 
-        .gato-info {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
+        .gato-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
 
         .gato-name {
             font-size: 1.4rem;
@@ -504,17 +481,9 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             margin-bottom: 1.5rem;
         }
 
-        .gato-meta span i {
-            width: 20px;
-            color: var(--purple-medium);
-        }
+        .gato-meta span i { width: 20px; color: var(--purple-medium); }
 
-        .gato-actions {
-            margin-top: auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 0.5rem;
-        }
+        .gato-actions { margin-top: auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0.5rem; }
 
         .btn {
             padding: 0.6rem 1rem;
@@ -542,50 +511,17 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             box-shadow: 0 6px 20px rgba(255, 117, 151, 0.4);
         }
 
-        .btn-secondary {
-            background-color: var(--purple-light);
-            color: var(--purple-dark);
-        }
+        .btn-secondary { background-color: var(--purple-light); color: var(--purple-dark); }
+        .btn-secondary:hover { background-color: var(--purple-medium); color: var(--white); transform: translateY(-2px); }
 
-        .btn-secondary:hover {
-            background-color: var(--purple-medium);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
+        .btn-following { background-color: var(--pink-medium); color: var(--white); border: 2px solid var(--pink-dark); }
+        .btn-following:hover { background-color: var(--pink-dark); color: var(--white); }
 
-        .btn-following {
-            background-color: var(--pink-medium);
-            color: var(--white);
-            border: 2px solid var(--pink-dark);
-        }
+        .btn-edit { background-color: #FEF08A; color: #854D0E; }
+        .btn-edit:hover { background-color: #FDE047; transform: translateY(-2px); }
 
-        .btn-following:hover {
-            background-color: var(--pink-dark);
-            color: var(--white);
-        }
-
-        .btn-edit {
-            background-color: #FEF08A;
-            color: #854D0E;
-        }
-
-        .btn-edit:hover {
-            background-color: #FDE047;
-            transform: translateY(-2px);
-        }
-
-        .btn-delete {
-            background-color: #FEE2E2;
-            color: #991B1B;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-delete:hover {
-            background-color: #FCA5A5;
-            transform: translateY(-2px);
-        }
+        .btn-delete { background-color: #FEE2E2; color: #991B1B; display: flex; align-items: center; justify-content: center; }
+        .btn-delete:hover { background-color: #FCA5A5; transform: translateY(-2px); }
 
         .form-card {
             background-color: var(--white);
@@ -599,43 +535,9 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             overflow: hidden;
         }
 
-        .form-card::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background-color: var(--pink-light);
-            border-radius: 50%;
-            z-index: 0;
-            opacity: 0.5;
-        }
-
-        .form-card::after {
-            content: '🐾';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            opacity: 0.2;
-            z-index: 0;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .form-label {
-            display: block;
-            font-weight: 700;
-            color: var(--dark-gray);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
+        .form-group { margin-bottom: 1.5rem; position: relative; z-index: 1; }
+        .form-label { display: block; font-weight: 700; color: var(--dark-gray); margin-bottom: 0.5rem; font-size: 0.95rem; }
+        
         .form-input {
             width: 100%;
             background-color: var(--cream);
@@ -648,30 +550,12 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             transition: var(--transition);
         }
 
-        .form-input:focus {
-            border-color: var(--pink-medium);
-            background-color: var(--white);
-            box-shadow: 0 0 0 4px rgba(255, 183, 202, 0.25);
-        }
+        .form-input:focus { border-color: var(--pink-medium); background-color: var(--white); box-shadow: 0 0 0 4px rgba(255, 183, 202, 0.25); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-textarea { resize: vertical; min-height: 100px; }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .file-input-wrapper {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            width: 100%;
-        }
-
+        .file-input-wrapper { position: relative; overflow: hidden; display: inline-block; width: 100%; }
+        
         .file-input-btn {
             display: flex;
             align-items: center;
@@ -688,33 +572,11 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             text-align: center;
         }
 
-        .file-input-btn:hover {
-            background-color: var(--purple-medium);
-            color: var(--white);
-        }
+        .file-input-btn:hover { background-color: var(--purple-medium); color: var(--white); }
+        .file-input-wrapper input[type=file] { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; }
 
-        .file-input-wrapper input[type=file] {
-            font-size: 100px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .btn-submit-container {
-            margin-top: 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-large {
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            width: 100%;
-            border-radius: 18px;
-        }
+        .btn-submit-container { margin-top: 2rem; text-align: center; position: relative; z-index: 1; }
+        .btn-large { padding: 1rem 2.5rem; font-size: 1.1rem; width: 100%; border-radius: 18px; }
 
         .toast {
             position: fixed;
@@ -734,155 +596,32 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             z-index: 1000;
         }
 
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast i { font-size: 1.5rem; color: var(--purple-dark); }
 
-        .toast i {
-            font-size: 1.5rem;
-            color: var(--purple-dark);
-        }
+        footer { background-color: var(--white); border-top: 3px solid var(--pink-medium); padding: 2rem 1rem; text-align: center; margin-top: auto; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+        .footer-logo { font-size: 1.4rem; font-weight: 700; color: var(--pink-dark); }
+        .footer-text { font-size: 0.9rem; color: #8c7d83; }
+        .footer-socials { display: flex; gap: 1rem; margin-top: 0.5rem; }
+        .footer-social-link { width: 36px; height: 36px; background-color: var(--pink-light); color: var(--pink-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .footer-social-link:hover { background-color: var(--pink-dark); color: var(--white); transform: scale(1.1); }
 
-        footer {
-            background-color: var(--white);
-            border-top: 3px solid var(--pink-medium);
-            padding: 2rem 1rem;
-            text-align: center;
-            margin-top: auto;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .footer-logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--pink-dark);
-        }
-
-        .footer-text {
-            font-size: 0.9rem;
-            color: #8c7d83;
-        }
-
-        .footer-socials {
-            display: flex;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .footer-social-link {
-            width: 36px;
-            height: 36px;
-            background-color: var(--pink-light);
-            color: var(--pink-dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .footer-social-link:hover {
-            background-color: var(--pink-dark);
-            color: var(--white);
-            transform: scale(1.1);
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(92, 79, 85, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: var(--transition);
-        }
-
-        .modal.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            background-color: var(--white);
-            border-radius: 30px;
-            border: 3px solid var(--purple-medium);
-            padding: 2rem;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            transform: scale(0.9);
-            transition: var(--transition);
-        }
-
-        .modal.open .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--purple-dark);
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--dark-gray);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .modal-close:hover {
-            color: var(--pink-dark);
-            transform: rotate(90deg);
-        }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(92, 79, 85, 0.5); backdrop-filter: blur(5px); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition); }
+        .modal.open { opacity: 1; pointer-events: auto; }
+        .modal-content { background-color: var(--white); border-radius: 30px; border: 3px solid var(--purple-medium); padding: 2rem; width: 90%; max-width: 500px; position: relative; transform: scale(0.9); transition: var(--transition); }
+        .modal.open .modal-content { transform: scale(1); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .modal-title { font-size: 1.5rem; font-weight: 700; color: var(--purple-dark); }
+        .modal-close { background: none; border: none; font-size: 1.5rem; color: var(--dark-gray); cursor: pointer; transition: var(--transition); }
+        .modal-close:hover { color: var(--pink-dark); transform: rotate(90deg); }
 
         @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            .nav-menu {
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-            .nav-link {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.9rem;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-            .form-card {
-                padding: 1.5rem;
-            }
+            .header-container { flex-direction: column; padding: 1rem; }
+            .nav-menu { width: 100%; justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
+            .nav-link { padding: 0.5rem 0.8rem; font-size: 0.9rem; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .form-card { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -934,15 +673,30 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
                                     <span class="post-time">Postado em <?= date('d/m às H:i', strtotime($post['criado_em'])) ?></span>
                                 </div>
                             </div>
+                            
                             <div class="post-image-wrapper">
                                 <img src="uploads/<?= htmlspecialchars($post['foto']) ?>" alt="Post" class="post-image">
                             </div>
-                            <div class="post-actions">
-                                <a href="processar_post.php?action=curtir&post_id=<?= $post['id'] ?>&gato_ativo=<?= $gatoAtivoId ?>" class="btn-action">
-                                    <i class="fa-solid fa-heart" style="color: var(--pink-dark);"></i>
-                                </a>
-                                <span class="likes-count"><span class="count"><?= $post['curtidas'] ?></span> lambidas</span>
+
+                            <div class="post-actions" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <a href="processar_post.php?action=curtir&post_id=<?= $post['id'] ?>&gato_ativo=<?= $gatoAtivoId ?>" class="btn-action">
+                                        <i class="fa-solid fa-heart" style="color: var(--pink-dark);"></i>
+                                    </a>
+                                    <span class="likes-count"><span class="count"><?= $post['curtidas'] ?></span> lambidas</span>
+                                </div>
+
+                                <?php if ($gatoAtivoId && (int)$post['gato_id'] === (int)$gatoAtivoId): ?>
+                                    <a href="processar_post.php?action=deletar_post&post_id=<?= $post['id'] ?>&gato_ativo=<?= $gatoAtivoId ?>" 
+                                       class="btn-action" 
+                                       title="Apagar Publicação"
+                                       onclick="return confirm('Queres mesmo apagar esta publicação miau-ravilhosa? 😿')"
+                                       style="color: #991B1B; font-size: 1.2rem; margin-right: 1.5rem;">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                <?php endif; ?>
                             </div>
+
                             <p class="post-caption">
                                 <strong><?= htmlspecialchars($post['gato_nome']) ?></strong><?= htmlspecialchars($post['legenda']) ?>
                             </p>
@@ -1018,7 +772,7 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
                         ?>
                         <div class="gato-card">
                             <div class="gato-img-wrapper">
-                                <img src="uploads/<?= htmlspecialchars($gato['foto']) ?>" alt="Foto do gato" class="gato-img">
+                                <img src="uploads/<?= htmlspecialchars($gato['foto']) ?>" alt="Foto do gatinho" class="gato-img">
                                 <span class="gato-personality-badge"><?= htmlspecialchars($gato['personalidade']) ?></span>
                             </div>
                             <div class="gato-info">
@@ -1161,7 +915,7 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
                         <label class="form-label">Foto da Publicação</label>
                         <div class="file-input-wrapper">
                             <div class="file-input-btn" id="file-label-post">
-                                <i class="fa-solid fa-image"></i> Carregar foto do momento fofo
+                                <i class="fa-solid fa-camera"></i> Carregar uma foto fofinha
                             </div>
                             <input type="file" name="foto_post" accept="image/*" required onchange="updateFileName(this, 'file-label-post')">
                         </div>
@@ -1328,6 +1082,8 @@ $secaoAtiva = isset($_GET['section']) ? $_GET['section'] : 'inicio';
             showToast('Deixou de seguir. 😿');
         } else if (status === 'erro_seguir_si_mesmo') {
             showToast('Ei! Você não pode seguir a si mesmo! 😹🌀');
+        } else if (status === 'post_deletado_sucesso') {
+            showToast('Publicação apagada com sucesso! 🐾🗑️');
         }
     </script>
 </body>
